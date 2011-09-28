@@ -36,4 +36,13 @@ public class ApplicationSettings {
 				ApplicationSettings.SETTINGS_KEY, Context.MODE_PRIVATE);
 		return pref.getString("email_address", null);
 	}
+
+	public void logOut() {
+		
+		SharedPreferences pref = context.getSharedPreferences(
+				ApplicationSettings.SETTINGS_KEY, Context.MODE_PRIVATE);
+		Editor prefEditor = pref.edit();
+		prefEditor.remove("email_address");
+		prefEditor.apply();		
+	}
 }
