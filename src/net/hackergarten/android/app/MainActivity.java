@@ -16,6 +16,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -25,6 +26,8 @@ public class MainActivity extends Activity {
 	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        ApplicationSettings settings = new ApplicationSettings(this);
         
         LinearLayout listLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.main, null);
         ListView listView = (ListView) listLayout.findViewById(R.id.eventListView);
@@ -41,14 +44,23 @@ public class MainActivity extends Activity {
 		});
         listView.setAdapter(fEventAdapter);
 
+        
         Button registerButton = (Button) listLayout.findViewById(R.id.registerButton);
-        registerButton.setOnClickListener(new OnClickListener() {
-			
-			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-				startActivity(intent);
-			}
-		});
+        TextView welcomeMessage = (TextView) listLayout.findViewById(R.id.welcomeMessage);
+        if (settings.isUserRegistered()) {
+        	registerButton.setVisibility(View.INVISIBLE);
+        	welcomeMessage.setVisibility(View.VISIBLE);
+        	welcomeMessage.setText("Welcome " + settings.getRegisteredUser()); 
+        } else {
+        	registerButton.setVisibility(View.VISIBLE);
+        	welcomeMessage.setVisibility(View.INVISIBLE);
+        	registerButton.setOnClickListener(new OnClickListener() {
+    			public void onClick(View v) {
+    				Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+    				startActivity(intent);
+    			}
+    		});
+        }
         
         setContentView(listLayout);
         
