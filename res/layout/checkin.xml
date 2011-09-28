@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TextView android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:text="Subject"
+		android:id="@+id/CheckinEventSubject" android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"></TextView>
+	<TextView android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:text="Location"
+		android:id="@+id/CheckinEventLocation" android:layout_below="@+id/CheckinEventSubject"
+		android:layout_alignParentLeft="true"></TextView>
+	<TextView android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:text="Time"
+		android:id="@+id/CheckinEventTime" android:layout_below="@+id/CheckinEventLocation"
+		android:layout_alignParentLeft="true"></TextView>
+	<TextView android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:text="Description"
+		android:id="@+id/CheckinEventDescription" android:layout_below="@+id/CheckinEventTime"
+		android:layout_alignParentLeft="true"></TextView>
+	<Button android:layout_height="wrap_content"
+		android:layout_width="wrap_content" android:id="@+id/CheckinButton"
+		android:text="@string/checkin" android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true" android:layout_marginBottom="72dp"></Button>
+</RelativeLayout>

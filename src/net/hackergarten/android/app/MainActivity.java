@@ -28,6 +28,8 @@ public class MainActivity extends Activity {
 		});
         
         setContentView(listLayout);
+        CurrentEventChecker ch = new CurrentEventChecker(this);
+        ch.checkForEvent();
     }
 	
 }
