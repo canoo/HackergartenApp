@@ -3,6 +3,8 @@ package net.hackergarten.android.app;
 import net.hackergarten.android.app.client.AsyncCallback;
 import net.hackergarten.android.app.client.HackergartenClient;
 import net.hackergarten.android.app.model.User;
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -28,12 +30,15 @@ public class RegisterActivity extends Activity {
 		
 		final ApplicationSettings settings = new ApplicationSettings(this); 
 
-		LinearLayout listLayout = (LinearLayout) getLayoutInflater().inflate(
-				R.layout.register, null);
-		TableLayout tableView = (TableLayout) listLayout
-				.findViewById(R.id.tableLayout1);
-
 		setContentView(R.layout.register);
+		
+		String gmail = getGoogleAccountName();
+
+		EditText textEmail = (EditText) findViewById(R.id.editTextEmail);
+		textEmail.setText(gmail);
+		if(gmail != null){
+			textEmail.setEnabled(false);
+		}
 
 		Button registerBtn = (Button) findViewById(R.id.button_register);
 		registerBtn.setOnClickListener(new OnClickListener() {
@@ -79,6 +84,24 @@ public class RegisterActivity extends Activity {
 				return value;
 			}
 		});
+	}
+
+	private String getGoogleAccountName() {
+		AccountManager manager = (AccountManager) getSystemService(ACCOUNT_SERVICE);
+		Account[] list = manager.getAccounts();
+
+		for(Account account: list)
+		{
+		    if(account.type.equalsIgnoreCase("com.google"))
+		    {
+		        return account.name;
+		    }
+		}
+		
+		if(list.length > 0){
+			return list[0].name;
+		}
+		return null;
 	}
 
 	private void showMessage(final String message) {

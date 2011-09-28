@@ -33,4 +33,12 @@
 		android:layout_gravity="bottom"
 		android:visibility="visible" />
 	
+	<TextView
+		android:id="@+id/welcomeMessage" 
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:gravity="center"
+		android:visibility="invisible" />
+	
 </LinearLayout>	
