@@ -24,11 +24,17 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        ApplicationSettings settings = new ApplicationSettings(this);
+        
         LinearLayout listLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.main, null);
         ListView listView = (ListView) listLayout.findViewById(R.id.eventListView);
         fEventAdapter = new EventArrayListAdapter(this, getLayoutInflater());
         listView.setAdapter(fEventAdapter);
 
+        
+        if (settings.isUserRegistered()) {
+        	
+        }
         Button registerButton = (Button) listLayout.findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new OnClickListener() {
 			

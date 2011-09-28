@@ -4,9 +4,13 @@ import net.hackergarten.android.app.client.AsyncCallback;
 import net.hackergarten.android.app.client.HackergartenClient;
 import net.hackergarten.android.app.model.User;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +25,8 @@ public class RegisterActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		final ApplicationSettings settings = new ApplicationSettings(this); 
 
 		LinearLayout listLayout = (LinearLayout) getLayoutInflater().inflate(
 				R.layout.register, null);
@@ -34,7 +40,7 @@ public class RegisterActivity extends Activity {
 
 			public void onClick(View v) {
 				User user = new User();
-				String emailValue = getFieldValue(R.id.editTextEmail);
+				final String emailValue = getFieldValue(R.id.editTextEmail);
 				if (emailValue.trim().length() == 0) {
 					Toast.makeText(RegisterActivity.this,
 							getString(R.string.register_failure_email),
@@ -51,31 +57,19 @@ public class RegisterActivity extends Activity {
 						new AsyncCallback<Void>() {
 
 							public void onSuccess(Void result) {
-								runOnUiThread(new Runnable() {
-
-									public void run() {
-										Toast.makeText(RegisterActivity.this,
-												getString(R.string.register_success),
-												Toast.LENGTH_LONG).show();
-										Intent intent = new Intent(
-												RegisterActivity.this,
-												MainActivity.class);
-										startActivity(intent);
-									}
-								});
+								showMessage(getString(R.string.register_success));
+								settings.registerUser(emailValue);
+								Intent intent = new Intent(
+										RegisterActivity.this,
+										MainActivity.class);
+								startActivity(intent);
 							}
 
 							public void onFailure(final Throwable t) {
-								runOnUiThread(new Runnable() {
-
-									public void run() {
-
-										Toast.makeText(RegisterActivity.this,
-												getString(R.string.register_failure) + "\n" + t.getMessage(),
-												Toast.LENGTH_LONG).show();
-									}
-								});
+								showMessage(getString(R.string.register_failure)
+										+ "\n" + t.getMessage());
 							}
+
 						});
 			}
 
@@ -83,6 +77,15 @@ public class RegisterActivity extends Activity {
 				EditText textField = (EditText) findViewById(widgetId);
 				String value = textField.getText().toString();
 				return value;
+			}
+		});
+	}
+
+	private void showMessage(final String message) {
+		runOnUiThread(new Runnable() {
+			public void run() {
+				Toast.makeText(RegisterActivity.this, message,
+						Toast.LENGTH_LONG).show();
 			}
 		});
 	}
