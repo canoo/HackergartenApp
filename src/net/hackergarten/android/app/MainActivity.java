@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
 				runOnUiThread(new Runnable() {
 					
 					public void run() {
-						Toast.makeText(MainActivity.this, "Failed to query server.", Toast.LENGTH_LONG);
+						Toast.makeText(MainActivity.this, "Failed to contact server.", Toast.LENGTH_LONG).show();
 						Log.e(MainActivity.class.getName(), "Failed to contact server.", t);
 					}
 				});
