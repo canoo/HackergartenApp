@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -30,6 +32,16 @@ public class MainActivity extends Activity {
         LinearLayout listLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.main, null);
         ListView listView = (ListView) listLayout.findViewById(R.id.eventListView);
         fEventAdapter = new EventArrayListAdapter(this, getLayoutInflater());
+        listView.setOnItemClickListener(new OnItemClickListener() {
+
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Event event = fEventAdapter.getEntries().get(position);
+				Intent intent = new Intent(MainActivity.this, EventDetailActivity.class);
+				intent.putExtra("event", event);
+				startActivity(intent);
+			}
+			
+		});
         listView.setAdapter(fEventAdapter);
 
         
@@ -73,7 +85,7 @@ public class MainActivity extends Activity {
 				runOnUiThread(new Runnable() {
 					
 					public void run() {
-						Toast.makeText(MainActivity.this, "Failed to query server.", Toast.LENGTH_LONG);
+						Toast.makeText(MainActivity.this, "Failed to contact server.", Toast.LENGTH_LONG).show();
 						Log.e(MainActivity.class.getName(), "Failed to contact server.", t);
 					}
 				});

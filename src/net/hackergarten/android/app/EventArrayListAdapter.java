@@ -52,6 +52,10 @@ public class EventArrayListAdapter implements ListAdapter, Filterable {
 		this.entries = entries;
 		notifyObserversChanged();
 	}
+	
+	public List<Event> getEntries() {
+		return entries;
+	}
 
 	// Adapter impl.
 	
