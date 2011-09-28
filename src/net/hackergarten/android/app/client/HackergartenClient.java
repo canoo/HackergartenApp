@@ -115,7 +115,8 @@ public class HackergartenClient {
 		HttpPost post = new HttpPost(BASE_URL + "/checkin/");
 		List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
 		nameValuePairs.add(new BasicNameValuePair(HttpMapper.EVENT_ID, eventId));
-		nameValuePairs.add(new BasicNameValuePair(HttpMapper.EMAIL, eventId));
+		nameValuePairs.add(new BasicNameValuePair(HttpMapper.EMAIL, userEmail)); 
+		
 		post.setHeader("Content-Type", "text/plain");//GAE workaround
 		try {
 			post.setEntity(new UrlEncodedFormEntity(nameValuePairs));
