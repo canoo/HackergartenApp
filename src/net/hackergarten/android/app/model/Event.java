@@ -1,8 +1,9 @@
 package net.hackergarten.android.app.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Event {
+public class Event implements Serializable {
 
 	private String id;
 	private String location;
