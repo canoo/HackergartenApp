@@ -2,4 +2,16 @@
 <resources>
     <string name="app_name">Hackergarten</string>
     <string name="button_register">Register</string>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string name="register_title">Hello World, Register to Hackergarten universe!</string>
+
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="company">Company</string>
+    <string name="twitter">Twitter</string>
+    <string name="blog">Blog</string>
+    <string name="register">Register</string>
+    <string name="register_failure">something went wrong</string>
+    <string name="register_failure_email">Email is required.</string>
+    <string name="register_success">Look at you, Hacker, we got you registered.</string>
 </resources>
