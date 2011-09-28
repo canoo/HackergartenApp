@@ -16,8 +16,16 @@
     <string name="register_success">Look at you, Hacker, we got you registered.</string>
     <string name="checkin">Check In!</string>
     
+    <string name="event_detail_location">Location</string>
+    <string name="event_detail_description">Description</string>
+    <string name="event_detail_time">Time</string>
+    <string name="event_detail_initiator">Initiator</string>
+    
     <string name="test_event_subject">Android Hackergarten @Canoo</string>
     <string name="test_event_description">The goal of this Hackergarten is to write a base Android Hackergarten app.</string>
     <string name="test_event_date">28.9.2011</string>
+    
+    <string name="test_event_detail">Android Hackergarten</string>
+    
     
 </resources>
