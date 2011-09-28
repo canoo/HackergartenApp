@@ -20,6 +20,14 @@ public class Event {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public long getIdAsLong() {
+		try {
+			return Long.parseLong(id);
+		} catch (NumberFormatException nfe) {
+			return id != null ? id.hashCode() : -1;
+		}
+	}
 
 	public String getLocation() {
 		return location;
