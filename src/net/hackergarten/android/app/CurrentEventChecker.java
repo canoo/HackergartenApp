@@ -6,6 +6,9 @@ import net.hackergarten.android.app.client.AsyncCallback;
 import net.hackergarten.android.app.client.HackergartenClient;
 import net.hackergarten.android.app.model.Event;
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
@@ -33,6 +36,11 @@ class CurrentEventChecker implements LocationListener {
 
 	public void checkForEvent() {
 		Log.d(TAG, "checking for event");
+		ApplicationSettings settings = new ApplicationSettings(activity);
+		if (!settings.isUserRegistered()) {
+			Log.d(TAG, "aborting check, user is not registered");
+			return;
+		}
 		final HackergartenClient client = new HackergartenClient();
 		client.listUpcomingEvents(new AsyncCallback<List<Event>>() {
 
@@ -70,6 +78,25 @@ class CurrentEventChecker implements LocationListener {
 		return (LocationManager) activity
 				.getSystemService(Context.LOCATION_SERVICE);
 	}
+	
+	private void showNotification() {
+		CharSequence tickerText = "Check In!";
+		long when = System.currentTimeMillis();
+		CharSequence contentTitle = "Check In Open!";
+		CharSequence contentText = "Click to check in to the Hackergarten event";
+
+		Intent notificationIntent = new Intent(activity, CheckinActivity.class);
+		notificationIntent.putExtra("event", currentEvents.get(1));
+		PendingIntent contentIntent = PendingIntent.getActivity(activity, 0, notificationIntent, 0);
+
+		// the next two lines initialize the Notification, using the configurations above
+		Notification notification = new Notification(R.drawable.icon, tickerText, when);
+		notification.setLatestEventInfo(activity, contentTitle, contentText, contentIntent);
+		
+		String ns = Context.NOTIFICATION_SERVICE;
+		NotificationManager mNotificationManager = (NotificationManager) activity.getSystemService(ns);
+		mNotificationManager.notify(1, notification);
+	}
 
 	public void onLocationChanged(Location location) {
 		getLocationManager().removeUpdates(this);
@@ -80,10 +107,8 @@ class CurrentEventChecker implements LocationListener {
 			eventLocation.setLongitude(event.getLongitude());
 			if (location.distanceTo(eventLocation) < 500) {
 				//we are at this event
-				Log.d(TAG, "starting activity for event " + event);
-				Intent intent = new Intent(activity, CheckinActivity.class);
-				intent.putExtra("eventId", event.getId());
-				activity.startActivity(intent);
+				Log.d(TAG, "starting activity for event " + currentEvents.get(0));
+				showNotification();
 			}
 		}
 	}
