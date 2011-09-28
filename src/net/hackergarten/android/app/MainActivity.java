@@ -104,6 +104,7 @@ public class MainActivity extends Activity {
         if (fSettings.isUserRegistered()) {
             menu.add(0, 1, 0, "log out");
         }
+        menu.add(1, 2, 0, "Hall of Fame");
 
         return true;
     }
@@ -117,6 +118,10 @@ public class MainActivity extends Activity {
                 final TextView welcomeMessage = (TextView) findViewById(R.id.welcomeMessage);
                 registerButton.setVisibility(View.VISIBLE);
                 welcomeMessage.setVisibility(View.INVISIBLE);
+                break;
+            case 2:
+            	startActivity(new Intent(this, HallOfFameActivity.class));
+            	break;
         }
         return true;
     }
