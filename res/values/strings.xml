@@ -11,9 +11,10 @@
     <string name="twitter">Twitter</string>
     <string name="blog">Blog</string>
     <string name="register">Register</string>
-    <string name="register_failure">something went wrong</string>
+    <string name="register_failure">You cound not be registered at this time.</string>
     <string name="register_failure_email">Email is required.</string>
     <string name="register_success">Look at you, Hacker, we got you registered.</string>
+    <string name="checkin">Check In!</string>
     
     <string name="test_event_subject">Android Hackergarten @Canoo</string>
     <string name="test_event_description">The goal of this Hackergarten is to write a base Android Hackergarten app.</string>

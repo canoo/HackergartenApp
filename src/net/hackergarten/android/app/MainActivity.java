@@ -8,6 +8,7 @@ import net.hackergarten.android.app.model.Event;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,7 +25,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         
         LinearLayout listLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.main, null);
-        ListView listView = (ListView) findViewById(R.id.eventListView);
+        ListView listView = (ListView) listLayout.findViewById(R.id.eventListView);
         fEventAdapter = new EventArrayListAdapter(this, getLayoutInflater());
         listView.setAdapter(fEventAdapter);
 
@@ -40,6 +41,8 @@ public class MainActivity extends Activity {
         setContentView(listLayout);
         
         queryEvents();
+        CurrentEventChecker ch = new CurrentEventChecker(this);
+        ch.checkForEvent();
     }
 	
 	private void queryEvents() {
@@ -49,8 +52,15 @@ public class MainActivity extends Activity {
 				fEventAdapter.setEntries(result);
 			}
 			
-			public void onFailure(Throwable t) {
-				Toast.makeText(MainActivity.this, "Failed to query server.", 3);
+			public void onFailure(final Throwable t) {
+				runOnUiThread(new Runnable() {
+					
+					public void run() {
+						Toast.makeText(MainActivity.this, "Failed to query server.", Toast.LENGTH_LONG);
+						Log.e(MainActivity.class.getName(), "Failed to contact server.", t);
+					}
+				});
+				
 			}
 			
 		});
