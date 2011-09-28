@@ -1,8 +1,9 @@
 package net.hackergarten.android.app.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CheckIn {
+public class CheckIn implements Serializable {
 
 	private String userId;
 	private String eventId;

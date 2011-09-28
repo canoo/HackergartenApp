@@ -98,7 +98,8 @@ class HttpMapper {
 		for (int i = 0; i < eventArray.length(); i++) {
 			JSONObject eventObject = (JSONObject) eventArray.get(i);
 			Event event = new Event();
-			event.setId(eventObject.getString(ID));
+			JSONObject idObject = eventObject.getJSONObject(ID);
+			event.setId(idObject.getString(ID));
 			event.setLocation(eventObject.getString(LOCATION));
 			event.setLatitude(eventObject.getDouble(LATITUDE));
 			event.setLongitude(eventObject.getDouble(LONGITUDE));
