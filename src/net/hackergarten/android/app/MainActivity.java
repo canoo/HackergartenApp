@@ -48,8 +48,13 @@ public class MainActivity extends Activity {
 	private void queryEvents() {
 		new HackergartenClient().listUpcomingEvents(new AsyncCallback<List<Event>>() {
 			
-			public void onSuccess(List<Event> result) {
-				fEventAdapter.setEntries(result);
+			public void onSuccess(final List<Event> result) {
+				runOnUiThread(new Runnable() {
+					
+					public void run() {
+						fEventAdapter.setEntries(result);
+					}
+				});
 			}
 			
 			public void onFailure(final Throwable t) {
