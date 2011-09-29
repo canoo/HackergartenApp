@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="server:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/server_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="hackergarten-server" />
+          <element id="gwt-compiler-output" facet="hackergarten-server/gwt/GWT" />
+          <element id="javaee-facet-classes" facet="hackergarten-server/web/Web" />
+          <element id="jpa-descriptors" facet="hackergarten-server/jpa/JPA" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="org.restlet.jar" module-name="hackergarten-server" />
+          <element id="library" level="module" name="org.restlet.ext.gwt.jar" module-name="hackergarten-server" />
+          <element id="library" level="module" name="org.restlet.ext.jackson.jar" module-name="hackergarten-server" />
+          <element id="library" level="module" name="org.restlet.ext.servlet.jar" module-name="hackergarten-server" />
+          <element id="library" level="module" name="org.restlet-gwt.jar" module-name="hackergarten-server" />
+          <element id="library" level="module" name="org.codehaus.jackson.core.jar" module-name="hackergarten-server" />
+          <element id="library" level="module" name="org.codehaus.jackson.mapper.jar" module-name="hackergarten-server" />
+          <element id="file-copy" path="/Applications/apps/appengine-java-sdk-1.5.4/lib/user/appengine-api-1.0-sdk-1.5.4.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/cache/commons-beanutils/commons-beanutils/jars/commons-beanutils-1.8.0.jar" />
+          <element id="file-copy" path="$USER_HOME$/.gradle/cache/commons-logging/commons-logging/jars/commons-logging-1.1.1.jar" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="hackergarten-server/web/Web" />
+    </root>
+  </artifact>
+</component>
