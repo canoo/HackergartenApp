@@ -105,7 +105,6 @@ public class MainActivity extends Activity {
             menu.add(0, 1, 0, "log out");
         }
         menu.add(1, 2, 0, "Hall of Fame");
-
         return true;
     }
 
