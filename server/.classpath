@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER/GWT"/>
+	<classpathentry kind="var" path="RESTLET-GWT/lib/org.restlet-gwt.jar"/>
+	<classpathentry kind="var" path="RESTLET-GAE/lib/org.restlet.ext.gwt.jar"/>
+	<classpathentry kind="var" path="RESTLET-GAE/lib/org.restlet.ext.jackson.jar"/>
+	<classpathentry kind="var" path="RESTLET-GAE/lib/org.restlet.ext.servlet.jar"/>
+	<classpathentry kind="var" path="RESTLET-GAE/lib/org.restlet.jar"/>
+	<classpathentry kind="var" path="RESTLET-GAE/lib/org.codehaus.jackson_1.7/org.codehaus.jackson.core.jar"/>
+	<classpathentry kind="var" path="RESTLET-GAE/lib/org.codehaus.jackson_1.7/org.codehaus.jackson.mapper.jar"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>

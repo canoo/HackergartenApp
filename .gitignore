@@ -1,0 +1,8 @@
+AndroidApp/bin/*
+AndroidApp/gen/*
+*iml
+*iws
+*ipr
+AndroidApp/.project 
+AndroidApp/.settings/* 
+AndroidApp/.classpath
