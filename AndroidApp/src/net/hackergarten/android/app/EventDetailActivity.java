@@ -80,7 +80,7 @@ public class EventDetailActivity extends Activity {
                 });
             }
         });
-    
+
     }
 	
 }
