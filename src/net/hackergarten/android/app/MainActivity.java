@@ -48,12 +48,12 @@ public class MainActivity extends Activity {
         Button registerButton = (Button) listLayout.findViewById(R.id.registerButton);
         TextView welcomeMessage = (TextView) listLayout.findViewById(R.id.welcomeMessage);
         if (settings.isUserRegistered()) {
-        	registerButton.setVisibility(View.INVISIBLE);
+        	registerButton.setVisibility(View.GONE);
         	welcomeMessage.setVisibility(View.VISIBLE);
         	welcomeMessage.setText("Welcome " + settings.getRegisteredUser()); 
         } else {
         	registerButton.setVisibility(View.VISIBLE);
-        	welcomeMessage.setVisibility(View.INVISIBLE);
+        	welcomeMessage.setVisibility(View.GONE);
         	registerButton.setOnClickListener(new OnClickListener() {
     			public void onClick(View v) {
     				Intent intent = new Intent(MainActivity.this, RegisterActivity.class);

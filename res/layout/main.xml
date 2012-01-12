@@ -10,11 +10,12 @@
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:background="@color/hg_background"
+	    android:background="@drawable/logo_background"
 	    >
 	    <ImageView 
 	    	android:id="@+id/logoImageView" 
-	    	android:src="@drawable/logo" 
+	    	android:src="@drawable/logo"
+            android:layout_gravity="center_horizontal"
 	    	android:layout_height="wrap_content"
 	    	android:layout_width="wrap_content" />
 	</LinearLayout>
@@ -39,6 +40,6 @@
 		android:layout_height="wrap_content"
 		android:layout_gravity="bottom"
 		android:gravity="center"
-		android:visibility="invisible" />
+		android:visibility="gone" />
 	
 </LinearLayout>	
