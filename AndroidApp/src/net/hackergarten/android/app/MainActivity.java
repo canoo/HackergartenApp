@@ -29,8 +29,7 @@ public class MainActivity extends Activity {
 
         final LinearLayout listLayout = (LinearLayout) getLayoutInflater().inflate(
                 R.layout.main, null);
-        final ListView listView = (ListView) listLayout
-                .findViewById(R.id.eventListView);
+        final ListView listView = (ListView) listLayout.findViewById(R.id.eventListView);
         fEventAdapter = new EventArrayListAdapter(this, getLayoutInflater());
         listView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -44,10 +43,8 @@ public class MainActivity extends Activity {
         });
         listView.setAdapter(fEventAdapter);
 
-        final Button registerButton = (Button) listLayout
-                .findViewById(R.id.registerButton);
-        final TextView welcomeMessage = (TextView) listLayout
-                .findViewById(R.id.welcomeMessage);
+        final Button registerButton = (Button) listLayout.findViewById(R.id.registerButton);
+        final TextView welcomeMessage = (TextView) listLayout.findViewById(R.id.welcomeMessage);
         if (fSettings.isUserRegistered()) {
             registerButton.setVisibility(View.INVISIBLE);
             welcomeMessage.setVisibility(View.VISIBLE);
@@ -105,6 +102,7 @@ public class MainActivity extends Activity {
             menu.add(0, 1, 0, "log out");
         }
         menu.add(1, 2, 0, "Hall of Fame");
+        menu.add(2, 3, 0, "Add event");
         return true;
     }
 
@@ -121,6 +119,9 @@ public class MainActivity extends Activity {
             case 2:
             	startActivity(new Intent(this, HallOfFameActivity.class));
             	break;
+            case 3:
+                startActivity(new Intent(this, AddEventActivity.class));
+                break;
         }
         return true;
     }

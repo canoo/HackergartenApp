@@ -6,19 +6,11 @@ import net.hackergarten.android.app.model.User;
 import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.os.Handler;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.TableLayout;
 import android.widget.Toast;
 import static android.view.View.*;
 
@@ -62,7 +54,7 @@ public class RegisterActivity extends Activity {
 						new AsyncCallback<Void>() {
 
 							public void onSuccess(Void result) {
-								showMessage(getString(R.string.register_success));
+								HackersHelper.showMessage(RegisterActivity.this, getString(R.string.register_success));
 								settings.registerUser(emailValue);
 								Intent intent = new Intent(
 										RegisterActivity.this,
@@ -71,8 +63,8 @@ public class RegisterActivity extends Activity {
 							}
 
 							public void onFailure(final Throwable t) {
-								showMessage(getString(R.string.register_failure)
-										+ "\n" + t.getMessage());
+								HackersHelper.showMessage(RegisterActivity.this, getString(R.string.register_failure)
+                                        + "\n" + t.getMessage());
 							}
 
 						});
@@ -102,14 +94,5 @@ public class RegisterActivity extends Activity {
 			return list[0].name;
 		}
 		return null;
-	}
-
-	private void showMessage(final String message) {
-		runOnUiThread(new Runnable() {
-			public void run() {
-				Toast.makeText(RegisterActivity.this, message,
-						Toast.LENGTH_LONG).show();
-			}
-		});
 	}
 }

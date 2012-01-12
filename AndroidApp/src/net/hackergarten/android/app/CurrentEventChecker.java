@@ -48,7 +48,8 @@ class CurrentEventChecker implements LocationListener {
 				Log.d(TAG, "got Events " + result.size());
 				currentEvents = result;
 				if (!currentEvents.isEmpty()) {
-					obtainCurrentLocation();
+					showNotification();
+//					obtainCurrentLocation();
 				}
 				client.close();
 			}

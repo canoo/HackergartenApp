@@ -6,3 +6,12 @@ AndroidApp/gen/*
 AndroidApp/.project 
 AndroidApp/.settings/* 
 AndroidApp/.classpath
+.idea
+.gradle
+build
+.project
+.settings
+build/
+local.properties
+out/
+
