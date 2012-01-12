@@ -37,6 +37,7 @@ dependencies {
     compile 'org.datanucleus:datanucleus-jpa:1.1.5'
     compile 'org.datanucleus:datanucleus-core:1.1.5'
     compile 'com.google.appengine.orm:datanucleus-appengine:1.0.10'
+    compile 'javax.jdo:jdo2-api:2.3-eb'
 
 }
 

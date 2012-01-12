@@ -74,4 +74,22 @@ public class EventServerResource extends ServerResource implements EventResource
 			}
 		}
 	}
+
+    @Get
+    public List<Event> list() {
+        EntityManager entityManager = null;
+        try {
+            entityManager = EMF.get().createEntityManager();
+            entityManager.getTransaction().begin();
+            Query query = entityManager.createQuery("select e from Event e where e.start = :today");
+            query.setParameter("today", new Date());
+            return query.getResultList();
+        } finally {
+            if (entityManager != null) {
+                entityManager.getTransaction().commit();
+                entityManager.close();
+            }
+        }
+    }
+
 }
