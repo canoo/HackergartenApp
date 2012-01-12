@@ -4,6 +4,7 @@ import java.util.List;
 
 import net.hackergarten.android.app.client.AsyncCallback;
 import net.hackergarten.android.app.client.HackergartenClient;
+import net.hackergarten.android.app.location.LocationHelper;
 import net.hackergarten.android.app.model.Event;
 import android.app.Activity;
 import android.app.Notification;
@@ -49,7 +50,7 @@ class CurrentEventChecker implements LocationListener {
 				currentEvents = result;
 				if (!currentEvents.isEmpty()) {
 					showNotification();
-//					obtainCurrentLocation();
+					obtainCurrentLocation();
 				}
 				client.close();
 			}
@@ -65,7 +66,7 @@ class CurrentEventChecker implements LocationListener {
 		activity.runOnUiThread(new Runnable() {
 			
 			public void run() {
-				LocationManager locationManager = getLocationManager();
+				LocationManager locationManager = LocationHelper.getLocationManager(activity);
 				Criteria criteria = new Criteria();
 				criteria.setAccuracy(Criteria.ACCURACY_COARSE);
 				String bestProvider = locationManager.getBestProvider(criteria, true);
@@ -75,11 +76,7 @@ class CurrentEventChecker implements LocationListener {
 		});
 	}
 
-	private LocationManager getLocationManager() {
-		return (LocationManager) activity
-				.getSystemService(Context.LOCATION_SERVICE);
-	}
-	
+
 	private void showNotification() {
 		CharSequence tickerText = "Check In!";
 		long when = System.currentTimeMillis();
@@ -100,9 +97,9 @@ class CurrentEventChecker implements LocationListener {
 	}
 
 	public void onLocationChanged(Location location) {
-		getLocationManager().removeUpdates(this);
+		LocationHelper.getLocationManager(activity).removeUpdates(this);
 		Log.d(TAG, "got location " + location);
-		Location eventLocation = new Location("me");
+		Location eventLocation = new Location("eventLocation");
 		for (Event event : currentEvents) {
 			eventLocation.setLatitude(event.getLatitude());
 			eventLocation.setLongitude(event.getLongitude());

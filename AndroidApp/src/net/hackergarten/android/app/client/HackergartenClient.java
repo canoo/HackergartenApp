@@ -1,10 +1,8 @@
 package net.hackergarten.android.app.client;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
-
+import android.util.Log;
+import net.hackergarten.android.app.model.Event;
+import net.hackergarten.android.app.model.User;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -12,18 +10,15 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 
-import android.content.ContentValues;
-import android.content.Entity;
-import android.util.Log;
-
-import net.hackergarten.android.app.model.Event;
-import net.hackergarten.android.app.model.User;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles all the communication to the Hackergarten server. All method calls

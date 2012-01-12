@@ -5,6 +5,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import net.hackergarten.android.app.client.AsyncCallback;
 import net.hackergarten.android.app.client.HackergartenClient;
+import net.hackergarten.android.app.location.LocationHelper;
 import net.hackergarten.android.app.model.Event;
 import android.app.Activity;
 import android.os.Bundle;
@@ -36,7 +37,15 @@ public class EventDetailActivity extends Activity {
         setContentView(detailView);
 
 		Button checkinButton = (Button) findViewById(R.id.CheckinButton);
-		        checkinButton.setOnClickListener(new View.OnClickListener() {
+		boolean eventIsInRange = LocationHelper.eventIsInRange(this, event);
+		if (!eventIsInRange) {
+			Toast.makeText(EventDetailActivity.this, "You are not within range", 1000).show();
+			checkinButton.setEnabled(false);
+			return;
+		}
+
+		checkinButton.setEnabled(true);
+		checkinButton.setOnClickListener(new View.OnClickListener() {
 					public void onClick(View v) {
 						HackergartenClient client = new HackergartenClient();
 						ApplicationSettings settings = new ApplicationSettings(EventDetailActivity.this);
