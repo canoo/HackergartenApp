@@ -18,7 +18,7 @@ public class ApplicationSettings {
 				ApplicationSettings.SETTINGS_KEY, Context.MODE_PRIVATE);
 		Editor prefEditor = pref.edit();
 		prefEditor.putString("email_address", userName);
-		prefEditor.apply();
+		prefEditor.commit();
 	}
 
 	public boolean isUserRegistered() {
