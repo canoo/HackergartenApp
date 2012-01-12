@@ -63,16 +63,24 @@
         android:text="Initiator" />
     </TableRow>
 </TableLayout>
+
+    <LinearLayout android:layout_height="wrap_content"
+                  android:orientation="horizontal"
+                  android:layout_width="wrap_content"
+                  android:layout_marginTop="10dp"
+>
+
     <Button android:id="@+id/showOnMapButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             android:text="Show on Map"/>
+
     <Button android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:id="@+id/CheckinButton"
-            android:layout_gravity="center"
+            android:layout_gravity="right"
             android:text="@string/checkin"
             />
+    </LinearLayout>
 </LinearLayout>
