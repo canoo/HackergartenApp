@@ -102,6 +102,7 @@ public class MainActivity extends Activity {
             menu.add(0, 1, 0, "log out");
         }
         menu.add(1, 2, 0, "Hall of Fame");
+        menu.add(2, 3, 0, "Add event");
         return true;
     }
 
@@ -118,6 +119,9 @@ public class MainActivity extends Activity {
             case 2:
             	startActivity(new Intent(this, HallOfFameActivity.class));
             	break;
+            case 3:
+                startActivity(new Intent(this, AddEventActivity.class));
+                break;
         }
         return true;
     }

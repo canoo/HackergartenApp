@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/app_background"
+    >
+
+    <TableLayout android:id="@+id/eventDetailTable"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:padding="5dp">
+        <TableRow android:id="@+id/tableRow2" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_detail_subject"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="fill_parent" />
+            <EditText
+                    android:id="@+id/eventDetailSubject"
+                    android:layout_height="wrap_content"
+                    android:layout_width="200dp" />
+        </TableRow>
+        <TableRow android:id="@+id/tableRow3" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_detail_description"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="fill_parent" />
+            <EditText
+                    android:id="@+id/eventDetailDescription"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:lines="4"
+                    />
+        </TableRow>
+        <TableRow android:id="@+id/tableRow6" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView
+                    android:layout_height="wrap_content"
+                    android:text="@string/event_detail_initiator"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="fill_parent" />
+            <EditText
+                    android:id="@+id/eventDetailInitiator"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:editable="false" />
+        </TableRow>
+    </TableLayout>
+    <Button android:id="@+id/buttonNext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Next"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"/>
+
+	
+</RelativeLayout>
