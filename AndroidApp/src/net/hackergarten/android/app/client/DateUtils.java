@@ -1,8 +1,12 @@
 package net.hackergarten.android.app.client;
 
 import java.util.Calendar;
+import java.util.Date;
 
-class DateUtils {
+public class DateUtils {
+
+	public static final int TEN_MINUTES = (1000 * 60 * 10);
+	public static final int FIVE_HOURS = 1000 * 60 * 60 * 5;
 
 	/**
 	 * @return the timezone offset of the current device relative to UTC
@@ -40,4 +44,24 @@ class DateUtils {
 		return localMillis + getTimeZoneOffsetInMillis();
 	}
 
+	public static Date currentDateInUTC() {
+		return new Date(getUTCTimeMillis());
+	}
+
+	public static boolean isTimeGreaterThan(Date eventTime, int threshold) {
+		return currentDateInUTC().getTime()-eventTime.getTime() >= threshold;
+	}
+
+	public static boolean isTimeSoonerThan(Date eventTime, int threshold) {
+		return currentDateInUTC().getTime()-eventTime.getTime() <= -threshold;
+	}
+	
+	public static boolean isTimeBetween(Date eventTime, int soonerThreshold, int laterThreshold) {
+		if (!DateUtils.isTimeSoonerThan(eventTime, soonerThreshold)) {
+			if (!DateUtils.isTimeGreaterThan(eventTime, laterThreshold)) {
+				return true;
+			} 
+		} 
+		return false;
+	}
 }

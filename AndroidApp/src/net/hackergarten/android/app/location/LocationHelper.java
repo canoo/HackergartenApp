@@ -9,14 +9,17 @@ import net.hackergarten.android.app.model.Event;
 
 public class LocationHelper {
 
-	private static final int RANGE_DISTANCE = 500;
+	private static final int ONE_KILOMETER = 1000;
 
 	public static boolean eventIsInRange(Activity activity, Event event) {
+		return eventIsInRange(event, getLastKnownLocation(activity));
+	}
+
+	public static boolean eventIsInRange(Event event, Location lastKnownLocation) {
 		Location eventLocation = new Location("eventLocation");
 		eventLocation.setLatitude(event.getLatitude());
 		eventLocation.setLongitude(event.getLongitude());
-		Location lastKnownLocation = getLastKnownLocation(activity);
-		if (lastKnownLocation != null && lastKnownLocation.distanceTo(eventLocation) < RANGE_DISTANCE) {
+		if (lastKnownLocation != null && lastKnownLocation.distanceTo(eventLocation) < ONE_KILOMETER) {
 			return true;
 		}
 		return false;

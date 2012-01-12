@@ -1,8 +1,11 @@
 package net.hackergarten.android.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import android.widget.Toast;
 import net.hackergarten.android.app.client.AsyncCallback;
+import net.hackergarten.android.app.client.DateUtils;
 import net.hackergarten.android.app.client.HackergartenClient;
 import net.hackergarten.android.app.location.LocationHelper;
 import net.hackergarten.android.app.model.Event;
@@ -21,16 +24,16 @@ import android.util.Log;
 
 /**
  * -
- * 
+ *
  * @author asocaciu
  */
 class CurrentEventChecker implements LocationListener {
-	
+
 	private static final String TAG = CurrentEventChecker.class.getSimpleName();
 
 	private Activity activity;
 	private List<Event> currentEvents;
-	
+
 	public CurrentEventChecker(Activity context) {
 		this.activity = context;
 	}
@@ -47,9 +50,13 @@ class CurrentEventChecker implements LocationListener {
 
 			public void onSuccess(List<Event> result) {
 				Log.d(TAG, "got Events " + result.size());
-				currentEvents = result;
+				currentEvents = new ArrayList<Event> ();
+				for (Event event : result) {
+					if (DateUtils.isTimeBetween(event.getTimeUST(), DateUtils.TEN_MINUTES, DateUtils.FIVE_HOURS)) {
+						currentEvents.add(event);
+					}
+				}
 				if (!currentEvents.isEmpty()) {
-					showNotification();
 					obtainCurrentLocation();
 				}
 				client.close();
@@ -64,7 +71,7 @@ class CurrentEventChecker implements LocationListener {
 
 	private void obtainCurrentLocation() {
 		activity.runOnUiThread(new Runnable() {
-			
+
 			public void run() {
 				LocationManager locationManager = LocationHelper.getLocationManager(activity);
 				Criteria criteria = new Criteria();
@@ -90,7 +97,7 @@ class CurrentEventChecker implements LocationListener {
 		// the next two lines initialize the Notification, using the configurations above
 		Notification notification = new Notification(R.drawable.icon, tickerText, when);
 		notification.setLatestEventInfo(activity, contentTitle, contentText, contentIntent);
-		
+
 		String ns = Context.NOTIFICATION_SERVICE;
 		NotificationManager mNotificationManager = (NotificationManager) activity.getSystemService(ns);
 		mNotificationManager.notify(1, notification);
@@ -99,11 +106,8 @@ class CurrentEventChecker implements LocationListener {
 	public void onLocationChanged(Location location) {
 		LocationHelper.getLocationManager(activity).removeUpdates(this);
 		Log.d(TAG, "got location " + location);
-		Location eventLocation = new Location("eventLocation");
 		for (Event event : currentEvents) {
-			eventLocation.setLatitude(event.getLatitude());
-			eventLocation.setLongitude(event.getLongitude());
-			if (location.distanceTo(eventLocation) < 500) {
+			if (LocationHelper.eventIsInRange(event, location)) {
 				//we are at this event
 				Log.d(TAG, "starting activity for event " + currentEvents.get(0));
 				showNotification();

@@ -89,8 +89,7 @@ public class HackergartenClient {
 	public void listUpcomingEvents(AsyncCallback<List<Event>> callback) {
 		HttpGet get = new HttpGet(BASE_URL + "/event/");
 		long utcTimeMillis = DateUtils.getUTCTimeMillis();
-		get.getParams().setParameter(HttpMapper.TIME,
-				utcTimeMillis);
+		get.getParams().setParameter(HttpMapper.TIME, utcTimeMillis);
 		Log.d(TAG, "listUpcomingEvents " + utcTimeMillis);
 		requestAsynchronously(callback, get,
 				new ResponseProcessor<List<Event>>() {
