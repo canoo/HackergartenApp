@@ -11,7 +11,7 @@
     <string name="twitter">Twitter</string>
     <string name="blog">Blog</string>
     <string name="register">Register</string>
-    <string name="register_failure">You cound not be registered at this time.</string>
+    <string name="register_failure">You could not be registered at this time.</string>
     <string name="register_failure_email">Email is required.</string>
     <string name="register_success">Look at you, Hacker, we got you registered.</string>
     <string name="checkin">Check In!</string>
