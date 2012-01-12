@@ -101,7 +101,7 @@ class CurrentEventChecker implements LocationListener {
 	public void onLocationChanged(Location location) {
 		getLocationManager().removeUpdates(this);
 		Log.d(TAG, "got location " + location);
-		Location eventLocation = new Location("me");
+		Location eventLocation = new Location("");
 		for (Event event : currentEvents) {
 			eventLocation.setLatitude(event.getLatitude());
 			eventLocation.setLongitude(event.getLongitude());

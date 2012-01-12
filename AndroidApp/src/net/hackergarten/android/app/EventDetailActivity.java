@@ -1,5 +1,8 @@
 package net.hackergarten.android.app;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.widget.Button;
 import net.hackergarten.android.app.model.Event;
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,21 +15,29 @@ public class EventDetailActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        Event event = (Event) getIntent().getExtras().get("event");
+        final Event event = (Event) getIntent().getExtras().get("event");
+
+        setContentView(R.layout.event_detail);
         
-        View detailView = getLayoutInflater().inflate(R.layout.event_detail, null);
-        TextView subjectView = (TextView) detailView.findViewById(R.id.eventDetailSubject);
+        TextView subjectView = (TextView) findViewById(R.id.eventDetailSubject);
         subjectView.setText(event.getSubject());
-        TextView locationView = (TextView) detailView.findViewById(R.id.eventDetailLocation);
+        TextView locationView = (TextView) findViewById(R.id.eventDetailLocation);
         locationView.setText(event.getLocation());
-        TextView descriptionView = (TextView) detailView.findViewById(R.id.eventDetailDescription);
+        TextView descriptionView = (TextView) findViewById(R.id.eventDetailDescription);
         descriptionView.setText(event.getDescription());
-        TextView timeView = (TextView) detailView.findViewById(R.id.eventDetailTime);
+        TextView timeView = (TextView) findViewById(R.id.eventDetailTime);
         timeView.setText(event.getTimeUST().toLocaleString());
-        TextView initiatorView = (TextView) detailView.findViewById(R.id.eventDetailInitiator);
+        TextView initiatorView = (TextView) findViewById(R.id.eventDetailInitiator);
         initiatorView.setText(event.getInitiator());
         
-        setContentView(detailView);
+        Button showOnMap = (Button) findViewById(R.id.showOnMapButton);
+        showOnMap.setOnClickListener(new View.OnClickListener() {
+            public void onClick(final View inView) {
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + event.getLatitude() + "," + event.getLongitude()));
+                startActivity(mapIntent);
+            }
+        });
+        
     }
 	
 }

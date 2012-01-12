@@ -2,6 +2,8 @@ package net.hackergarten.android.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +12,9 @@ import net.hackergarten.android.app.client.AsyncCallback;
 import net.hackergarten.android.app.client.HackergartenClient;
 import net.hackergarten.android.app.model.Event;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 public class AddEventActivity extends Activity {
 
@@ -21,6 +25,8 @@ public class AddEventActivity extends Activity {
     private DatePicker fDate;
     private TimePicker fTime;
     private TextView fLocation;
+    private TextView fLatitude;
+    private TextView fLongitude;
 
     /**
      * Called when the activity is first created.
@@ -59,11 +65,33 @@ public class AddEventActivity extends Activity {
         fSubject = (TextView) addEventLayout.findViewById(R.id.eventDetailSubject);
         fDescription = (TextView) addEventLayout.findViewById(R.id.eventDetailDescription);
         fInitiator = (TextView) addEventLayout.findViewById(R.id.eventDetailInitiator);
+        fLocation = (TextView) addEventLayout.findViewById(R.id.eventDetailLocation);
+        fLatitude = (TextView) addEventLayout.findViewById(R.id.eventDetailLatitude);
+        fLongitude = (TextView) addEventLayout.findViewById(R.id.eventDetailLongitude);
+        Button geocode = (Button) addEventLayout.findViewById(R.id.eventDetaiLocate);
+        if (Geocoder.isPresent()) {
+            geocode.setOnClickListener(new View.OnClickListener() {
+                public void onClick(final View inView) {
+                    String location = fLocation.getText().toString();
+                    Geocoder coder = new Geocoder(AddEventActivity.this);
+                    try {
+                        final List<Address> fromLocationName = coder.getFromLocationName(location, 1);
+                        if (!fromLocationName.isEmpty()) {
+                            fLatitude.setText(Double.toString(fromLocationName.get(0).getLatitude()));
+                            fLongitude.setText(Double.toString(fromLocationName.get(0).getLongitude()));
+                        }
+                    } catch (IOException e) {
+                        HackersHelper.showMessage(AddEventActivity.this, "Error getting coordinates: " + e.getMessage());
+                        
+                    }
+                }
+            });
+        } else {
+            geocode.setEnabled(false);
+        }
 
         fDate = (DatePicker) addEventLayout2.findViewById(R.id.eventDetailDate);
         fTime = (TimePicker) addEventLayout2.findViewById(R.id.eventDetailTime);
-        fLocation = (TextView) addEventLayout2.findViewById(R.id.eventDetailLocation);
-        fLocation = (TextView) addEventLayout2.findViewById(R.id.eventDetailLocation);
 
         //Fill initiator
         ApplicationSettings appSettings= new ApplicationSettings(this);
@@ -80,6 +108,8 @@ public class AddEventActivity extends Activity {
         event.setSubject(fSubject.getText().toString());
         event.setLocation(fLocation.getText().toString());
         event.setTimeUST(new Date(fDate.getYear(), fDate.getMonth(), fDate.getDayOfMonth(), fTime.getCurrentHour(), fTime.getCurrentMinute()));
+        event.setLatitude(Double.parseDouble(fLatitude.getText().toString()));
+        event.setLongitude(Double.parseDouble(fLatitude.getText().toString()));
 
         client.addEvent(event, new AsyncCallback<Void>() {
             public void onSuccess(final Void result) {

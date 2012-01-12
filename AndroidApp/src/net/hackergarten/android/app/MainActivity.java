@@ -100,9 +100,9 @@ public class MainActivity extends Activity {
         super.onCreateOptionsMenu(menu);
         if (fSettings.isUserRegistered()) {
             menu.add(0, 1, 0, "log out");
+            menu.add(2, 3, 0, "Add event");
         }
         menu.add(1, 2, 0, "Hall of Fame");
-        menu.add(2, 3, 0, "Add event");
         return true;
     }
 
