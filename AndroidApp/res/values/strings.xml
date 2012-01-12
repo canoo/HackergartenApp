@@ -18,6 +18,7 @@
     
     <string name="event_detail_location">Location</string>
     <string name="event_detail_description">Description</string>
+    <string name="event_detail_subject">Subject</string>
     <string name="event_detail_time">Time</string>
     <string name="event_detail_initiator">Initiator</string>
     
@@ -26,6 +27,7 @@
     <string name="test_event_date">28.9.2011</string>
     
     <string name="test_event_detail">Android Hackergarten</string>
+
     
     
 </resources>
