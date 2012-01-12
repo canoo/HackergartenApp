@@ -13,8 +13,10 @@ import net.hackergarten.android.app.client.HackergartenClient;
 import net.hackergarten.android.app.model.Event;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 public class AddEventActivity extends Activity {
 
@@ -107,7 +109,14 @@ public class AddEventActivity extends Activity {
         event.setDescription(fDescription.getText().toString());
         event.setSubject(fSubject.getText().toString());
         event.setLocation(fLocation.getText().toString());
-        event.setTimeUST(new Date(fDate.getYear(), fDate.getMonth(), fDate.getDayOfMonth(), fTime.getCurrentHour(), fTime.getCurrentMinute()));
+        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+        cal.set(Calendar.YEAR, fDate.getYear());
+        cal.set(Calendar.MONTH, fDate.getMonth());
+        cal.set(Calendar.DATE, fDate.getDayOfMonth());
+        cal.set(Calendar.HOUR, fTime.getCurrentHour());
+        cal.set(Calendar.MINUTE, fTime.getCurrentMinute());
+
+        event.setTimeUST(cal.getTime());
         event.setLatitude(Double.parseDouble(fLatitude.getText().toString()));
         event.setLongitude(Double.parseDouble(fLatitude.getText().toString()));
 
