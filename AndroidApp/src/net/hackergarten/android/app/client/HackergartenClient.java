@@ -173,7 +173,7 @@ public class HackergartenClient {
 						callback.onSuccess(result);
 					} else {
 						Log.d(TAG, "onFailure");
-						callback.onFailure(null);
+						callback.onFailure(new Throwable("Unexpected status code: " + statusCode));
 					}
 					if (response.getEntity() != null) {
 						response.getEntity().consumeContent();
