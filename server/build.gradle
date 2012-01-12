@@ -31,6 +31,8 @@ dependencies {
     compile 'org.apache.geronimo.specs:geronimo-jta_1.1_spec:1.1.1'
     compile 'org.restlet.gae:org.restlet:2.1-M7'
     compile 'org.restlet.gwt:org.restlet:2.1-M7'
+    compile 'org.restlet.jse:org.restlet:2.1-M7'
+    compile 'org.restlet.jee:org.restlet.ext.servlet:2.1-M7'
     compile 'commons-beanutils:commons-beanutils:1.8.3'
     compile 'org.datanucleus:datanucleus-jpa:1.1.5'
     compile 'org.datanucleus:datanucleus-core:1.1.5'
@@ -45,12 +47,4 @@ gae {
         email = 'finish@gapps.canoo.com'
         passIn = true
     }
-}
-
-sourceSets {
-  main {
-    java {
-      srcDir 'src'
-    }
-  }
 }

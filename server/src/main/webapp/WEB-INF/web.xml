@@ -8,7 +8,7 @@
 		<servlet-class>org.restlet.ext.servlet.ServerServlet</servlet-class>
 		<init-param>
 			<param-name>org.restlet.application</param-name>
-			<param-value>register.web.server.TestServerApplication</param-value>
+			<param-value>com.canoo.hackergarten.register.web.server.TestServerApplication</param-value>
 		</init-param>
 	</servlet>
 
