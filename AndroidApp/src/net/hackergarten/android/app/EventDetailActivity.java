@@ -1,15 +1,22 @@
 package net.hackergarten.android.app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.widget.Button;
-import net.hackergarten.android.app.model.Event;
-import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+import net.hackergarten.android.app.client.AsyncCallback;
+import net.hackergarten.android.app.client.HackergartenClient;
+import net.hackergarten.android.app.location.LocationHelper;
+import net.hackergarten.android.app.model.Event;
 
 public class EventDetailActivity extends Activity {
+
+	private static final String TAG = "EventDetailActivity";
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +44,43 @@ public class EventDetailActivity extends Activity {
                 startActivity(mapIntent);
             }
         });
-        
+
+        Button checkinButton = (Button) findViewById(R.id.CheckinButton);
+        boolean eventIsInRange = LocationHelper.eventIsInRange(this, event);
+        if (!eventIsInRange) {
+            Toast.makeText(EventDetailActivity.this, "You are not within range", 1000).show();
+            checkinButton.setEnabled(false);
+            return;
+        }
+
+        checkinButton.setEnabled(true);
+        checkinButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                HackergartenClient client = new HackergartenClient();
+                ApplicationSettings settings = new ApplicationSettings(EventDetailActivity.this);
+                client.checkInUser(settings.getRegisteredUser(), event.getId(), new AsyncCallback<Void>() {
+                    public void onSuccess(Void result) {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Log.d(TAG, "checkin success");
+                                Toast.makeText(EventDetailActivity.this, "Checkin OK", 500).show();
+                                finish();
+                            }
+                        });
+                    }
+
+                    public void onFailure(Throwable t) {
+                        runOnUiThread(new Runnable() {
+                            public void run() {
+                                Log.d(TAG, "checkin failed");
+                                Toast.makeText(EventDetailActivity.this, "Checkin Failed", 500).show();
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    
     }
 	
 }

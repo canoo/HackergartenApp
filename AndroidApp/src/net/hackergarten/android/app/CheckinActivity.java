@@ -48,9 +48,9 @@ public class CheckinActivity extends Activity {
 								finish();
 							}
 						});
-						
+
 					}
-					
+
 					public void onFailure(Throwable t) {
 						runOnUiThread(new Runnable() {
 							public void run() {

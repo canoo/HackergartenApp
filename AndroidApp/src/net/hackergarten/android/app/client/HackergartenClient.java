@@ -35,6 +35,7 @@ import net.hackergarten.android.app.model.User;
 public class HackergartenClient {
 
 	private static final String BASE_URL = "http://hackergarten-register.appspot.com";
+	
 //	private static final String BASE_URL = "http://192.168.0.156:8080";
 	
 	
