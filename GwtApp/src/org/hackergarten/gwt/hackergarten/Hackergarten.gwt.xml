@@ -9,7 +9,5 @@
     <entry-point class='org.hackergarten.gwt.hackergarten.client.Hackergarten'/>
 
 
-    <!-- Specify the app servlets.                   -->
-    <servlet path='/HackergartenService' class='org.hackergarten.gwt.hackergarten.server.HackergartenServiceImpl'/>
 
 </module>

@@ -5,4 +5,5 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
            version="2.5">
 
-<servlet><servlet-name>Hackergarten HackergartenService</servlet-name><servlet-class>org.hackergarten.gwt.hackergarten.server.HackergartenServiceImpl</servlet-class></servlet><servlet-mapping><servlet-name>Hackergarten HackergartenService</servlet-name><url-pattern>/Hackergarten/HackergartenService</url-pattern></servlet-mapping></web-app>
+</web-app>
+        
