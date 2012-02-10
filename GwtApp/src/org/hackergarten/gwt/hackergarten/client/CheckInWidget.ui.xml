@@ -1,0 +1,15 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		#hello {
+			text-align: left;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<p id="eventList">
+			<g:ListBox ui:field="eventList" visibleItemCount="5" />
+			<g:Button ui:field="checkIn" text="Select and click me to CheckIn!"/>
+		</p>
+	</g:HTMLPanel>
+</ui:UiBinder> 

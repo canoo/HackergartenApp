@@ -12,7 +12,17 @@
     <!-- This script is required bootstrap stuff.   -->
     <!--                                            -->
     <script type="text/javascript" language="javascript" src="Hackergarten/Hackergarten.nocache.js"></script>
+
+    <!-- PhoneGap -->
+    <script type="text/javascript" language="javascript" src="phonegap-1.4.1.js"></script>
+
+    <!-- PhoneGap: for Android -->
+    <script type="text/javascript">
+		document.addEventListener("deviceready", (function(){ PhoneGap.available = true;}), false);
+	</script>
+
 </head>
+
 <body>
 
 <h1>Hackergarten Application</h1>

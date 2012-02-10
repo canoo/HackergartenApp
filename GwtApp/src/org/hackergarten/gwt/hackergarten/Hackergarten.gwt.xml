@@ -8,6 +8,14 @@
     <!-- Specify the app entry point class.                   -->
     <entry-point class='org.hackergarten.gwt.hackergarten.client.Hackergarten'/>
 
+    <inherits name="com.google.gwt.logging.Logging" />
+   	<set-property name="gwt.logging.simpleRemoteHandler"
+   		value="DISABLED" />
+   	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
 
+    <!-- Other module inherits -->
+   	<inherits name='com.googlecode.gwtphonegap.PhoneGap' />
+
+    <source path='client' />
 
 </module>
